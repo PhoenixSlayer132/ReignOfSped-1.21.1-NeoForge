@@ -1,5 +1,6 @@
 package com.phoenixslayer132.reignofsped;
 
+import com.phoenixslayer132.reignofsped.magics.vocalmagic.VoskIntegration;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -14,8 +15,8 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 @Mod(value = ReignOfSped.MODID, dist = Dist.CLIENT)
 // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
 @EventBusSubscriber(modid = ReignOfSped.MODID, value = Dist.CLIENT)
-public class ExampleModClient {
-    public ExampleModClient(ModContainer container) {
+public class ReignOfSpedClient {
+    public ReignOfSpedClient(ModContainer container) {
         // Allows NeoForge to create a config screen for this mod's configs.
         // The config screen is accessed by going to the Mods screen > clicking on your mod > clicking on config.
         // Do not forget to add translations for your config options to the en_us.json file.
@@ -27,5 +28,6 @@ public class ExampleModClient {
         // Some client setup code
         ReignOfSped.LOGGER.info("HELLO FROM CLIENT SETUP");
         ReignOfSped.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+        event.enqueueWork(VoskIntegration::start);
     }
 }
