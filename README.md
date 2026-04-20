@@ -1,10 +1,10 @@
 <img width="636" height="838" alt="Reign of Sped: Vocal Magic Thumbnail" src="Reign Of Sped_ Vocal Magic Thumbnail _ C.O.D.E. Engineering Challenge SP-2026.png" />
-=======
+---------------------------------------
 
-[Demo Video](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)
+[Demo Video](https://youtu.be/-i1vDy9EOXE)
 
-# Reign Of Sped Dev
-## Reign of Sped: Vocal Magic
+Reign Of Sped Dev Presents:
+# Reign of Sped: Vocal Magic
 ### A Minecraft Mod focusing on allowing the user to cast spells with a custom vocal language!
 
 
