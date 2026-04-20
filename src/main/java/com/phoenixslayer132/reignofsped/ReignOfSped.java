@@ -1,5 +1,10 @@
 package com.phoenixslayer132.reignofsped;
 
+import com.phoenixslayer132.reignofsped.item.ModItems;
+import com.phoenixslayer132.reignofsped.network.VocalCueHandler;
+import com.phoenixslayer132.reignofsped.network.VocalCuePayload;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -17,10 +22,10 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
-@Mod(ReignOfSped.MODID)
+@Mod(ReignOfSped.MOD_ID)
 public class ReignOfSped {
     // Define mod id in a common place for everything to reference
-    public static final String MODID = "reignofsped";
+    public static final String MOD_ID = "reignofsped";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
     // The constructor for the mod class is the first code that is run when your mod is loaded.
@@ -35,9 +40,20 @@ public class ReignOfSped {
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
+        modEventBus.addListener(this::registerPackets);
 
+        ModItems.register(modEventBus);
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+    }
+
+    private void registerPackets(RegisterPayloadHandlersEvent event) {
+        final PayloadRegistrar registrar = event.registrar("1");
+        registrar.playToServer(
+                VocalCuePayload.TYPE,
+                VocalCuePayload.CODEC,
+                VocalCueHandler::handle
+        );
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
